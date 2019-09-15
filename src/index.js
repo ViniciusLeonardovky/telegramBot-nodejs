@@ -20,8 +20,7 @@ const commands = [
   "/OPINAR",
   "/opinar",
   "/SUGESTIONAR",
-  "/sugestionar",
-  "/qtd"
+  "/sugestionar"
 ];
 
 /*
@@ -73,11 +72,6 @@ bot.on("message", msg => {
     return bot.sendMessage(
       chatId,
       "Obrigado pela sua sugestão.\nSua mensagem foi recebida com sucesso e será analisada."
-    );
-  } else if (messageContent.toUpperCase() === "/QTD") {
-    return bot.sendMessage(
-      chatId,
-      `Total de mensagens: ${collectMessages.length}`
     );
   }
 });
