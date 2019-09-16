@@ -19,8 +19,8 @@ const commands = [
   "/opiniao",
   "/OPINAR",
   "/opinar",
-  "/SUGESTIONAR",
-  "/sugestionar"
+  "/SUGERIR",
+  "/sugerir"
 ];
 
 /*
@@ -53,7 +53,7 @@ bot.on("message", msg => {
   ) {
     bot.sendMessage(
       chatId,
-      `Olá Sr, Sr(a) ${userName}!\nPara sugestões, digite em uma mensagem abaixo (iniciando com "/sugestionar", exemplo: "/sugestionar Essa é minha sugestão.").`
+      `Olá Sr, Sr(a) ${userName}!\nPara sugestões, digite em uma mensagem abaixo (iniciando com "/sugerir", exemplo: "/sugerir Essa é minha sugestão.").`
     );
   } else if (
     messageContent.toUpperCase() === "/OPINIÃO" ||
@@ -68,7 +68,7 @@ bot.on("message", msg => {
       chatId,
       "Obrigado pela sua opinião.\nSua mensagem foi recebida com sucesso e será analisada."
     );
-  } else if (messageContent.toUpperCase().includes("/SUGESTIONAR")) {
+  } else if (messageContent.toUpperCase().includes("/SUGERIR")) {
     return bot.sendMessage(
       chatId,
       "Obrigado pela sua sugestão.\nSua mensagem foi recebida com sucesso e será analisada."
