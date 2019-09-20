@@ -23,16 +23,21 @@ const commands = [
   "/sugerir"
 ];
 
-/*
-function UserAvaliation(userAvaliationContent, userChatId) {
+function UserAvaliation(userAvaliationContent, userChatId, typeReturn) {
   if (!commands.includes(userAvaliationContent)) {
-    return bot.sendMessage(
-      userChatId,
-      `Obrigado pela sua avaliação.\nSua mensagem foi recebida com sucesso e será analisada.`
-    );
+    if (typeReturn === "opinar") {
+      return bot.sendMessage(
+        userChatId,
+        "Obrigado pela sua opinião.\nSua mensagem foi recebida com sucesso e será analisada."
+      );
+    } else if (typeReturn === "sugerir") {
+      return bot.sendMessage(
+        userChatId,
+        "Obrigado pela sua sugestão.\nSua mensagem foi recebida com sucesso e será analisada."
+      );
+    }
   }
 }
-*/
 
 bot.on("message", msg => {
   const chatId = msg.chat.id; // Id do chat
@@ -46,14 +51,14 @@ bot.on("message", msg => {
   if (!commands.includes(messageContent)) {
     collectMessages.push(messageContent);
   }
-  // UserAvaliation(messageContent, chatId);
+
   if (
     messageContent.toUpperCase() === "/SUGESTÃO" ||
     messageContent.toUpperCase() === "/SUGESTAO"
   ) {
     bot.sendMessage(
       chatId,
-      `Olá Sr, Sr(a) ${userName}!\nPara sugestões, digite em uma mensagem abaixo (iniciando com "/sugerir", exemplo: "/sugerir Essa é minha sugestão.").`
+      `Olá ${userName}!\nPara sugestões, digite em uma mensagem abaixo (iniciando com "/sugerir", exemplo: "/sugerir Essa é minha sugestão.").`
     );
   } else if (
     messageContent.toUpperCase() === "/OPINIÃO" ||
@@ -61,17 +66,11 @@ bot.on("message", msg => {
   ) {
     return bot.sendMessage(
       chatId,
-      `Olá Sr, Sr(a) ${userName}!\nPara expressar sua opinião, digite suas considerações em uma mensagem abaixo (iniciando com "/opinar", exemplo: "/opinar Essa é minha opinião.")..`
+      `Olá ${userName}!\nPara expressar sua opinião, digite suas considerações em uma mensagem abaixo (iniciando com "/opinar", exemplo: "/opinar Essa é minha opinião.")..`
     );
   } else if (messageContent.toUpperCase().includes("/OPINAR")) {
-    return bot.sendMessage(
-      chatId,
-      "Obrigado pela sua opinião.\nSua mensagem foi recebida com sucesso e será analisada."
-    );
+    return UserAvaliation(messageContent, chatId, "opinar");
   } else if (messageContent.toUpperCase().includes("/SUGERIR")) {
-    return bot.sendMessage(
-      chatId,
-      "Obrigado pela sua sugestão.\nSua mensagem foi recebida com sucesso e será analisada."
-    );
+    return UserAvaliation(messageContent, chatId, "sugerir");
   }
 });
